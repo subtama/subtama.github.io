@@ -253,7 +253,28 @@ def main():
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
         f.write(index_html)
 
-    print(f"Built {len(articles)} article(s) -> {OUT}")
+    # sitemap.xml (helps Google discover/index pages)
+    base = cfg["base_url"].rstrip("/")
+    urls = [(base + "/", None)]
+    for m in articles:
+        urls.append((f"{base}/articles/{m['slug']}.html", m.get("updated")))
+    sm = ['<?xml version="1.0" encoding="UTF-8"?>',
+          '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for loc, lastmod in urls:
+        sm.append("  <url>")
+        sm.append(f"    <loc>{loc}</loc>")
+        if lastmod:
+            sm.append(f"    <lastmod>{lastmod}</lastmod>")
+        sm.append("  </url>")
+    sm.append("</urlset>")
+    with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as f:
+        f.write("\n".join(sm) + "\n")
+
+    # robots.txt
+    with open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8") as f:
+        f.write("User-agent: *\nAllow: /\nSitemap: " + base + "/sitemap.xml\n")
+
+    print(f"Built {len(articles)} article(s) + sitemap/robots -> {OUT}")
 
 
 if __name__ == "__main__":

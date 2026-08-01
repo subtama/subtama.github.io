@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://subtama.github.io/sitemap.xml
