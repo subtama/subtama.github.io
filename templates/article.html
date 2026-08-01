@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}} | {{site_name}}</title>
+<meta name="description" content="{{description}}">
+<link rel="canonical" href="{{base_url}}/articles/{{slug}}.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:url" content="{{base_url}}/articles/{{slug}}.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{title}}",
+  "description": "{{description}}",
+  "datePublished": "{{date}}",
+  "dateModified": "{{updated}}",
+  "author": {"@type": "Organization", "name": "{{site_name}}"},
+  "publisher": {"@type": "Organization", "name": "{{site_name}}"}
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../index.html">{{site_name}}</a>
+    <nav><a href="../index.html">記事一覧</a></nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <article>
+      <div class="meta"><span class="tag">{{category}}</span> 更新: {{updated}}</div>
+      <h1>{{title}}</h1>
+      <div class="disclosure">※本記事はプロモーション（アフィリエイト広告）を含みます。掲載順は編集部の評価によるもので、料金・内容は各公式サイトの情報をご確認ください。</div>
+      {{content}}
+    </article>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    &copy; {{year}} {{site_name}} ｜ <a href="../index.html">トップ</a>
+  </div>
+</footer>
+</body>
+</html>

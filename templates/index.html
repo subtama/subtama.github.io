@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{site_name}} | {{tagline}}</title>
+<meta name="description" content="{{site_description}}">
+<link rel="canonical" href="{{base_url}}/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{site_name}}">
+<meta property="og:description" content="{{site_description}}">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">{{site_name}}</a>
+    <nav><a href="index.html">記事一覧</a></nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <div class="hero">
+      <h1>{{site_name}}</h1>
+      <p>{{tagline}}</p>
+    </div>
+    <div class="card-grid">
+      {{cards}}
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    &copy; {{year}} {{site_name}} ｜ サブスク・VODの比較メディア
+  </div>
+</footer>
+</body>
+</html>
