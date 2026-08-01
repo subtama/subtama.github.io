@@ -100,5 +100,47 @@ tr:nth-child(even) td { background: #fafbfe; }
 .card p { color: var(--muted); font-size: 14px; margin: 0; }
 .card a.full { color: var(--fg); }
 
+/* ===== ranking cards ===== */
+.rankcard {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px 20px 20px;
+  margin: 22px 0;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+.rankcard.top { border: 2px solid #f5c518; box-shadow: 0 6px 22px rgba(245,197,24,0.18); }
+.rankcard .badge {
+  position: absolute; top: -14px; left: 18px;
+  font-weight: 800; font-size: 13px; color: #fff;
+  padding: 5px 14px; border-radius: 999px; letter-spacing: 0.02em;
+  background: #9aa0a6;
+}
+.rankcard .badge.g1 { background: linear-gradient(135deg,#f7c948,#e8a100); color:#5a3d00; }
+.rankcard .badge.g2 { background: linear-gradient(135deg,#cfd4da,#a7adb4); color:#33383d; }
+.rankcard .badge.g3 { background: linear-gradient(135deg,#e6a774,#c9743b); color:#4a2708; }
+.rankcard .rc-head { display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-top:4px; }
+.rankcard .rc-name { font-size: 21px; font-weight: 800; letter-spacing:-0.01em; }
+.rankcard .rc-rating { white-space:nowrap; font-size:14px; color:var(--muted); }
+.rankcard .stars { color:#f5c518; letter-spacing:1px; font-size:16px; }
+.rankcard .rc-price { display:inline-block; background:var(--card); border:1px solid var(--line); border-radius:8px; padding:6px 12px; margin:12px 0; font-weight:700; font-size:15px; }
+.rankcard .rc-blurb { margin:8px 0 4px; color:#333; }
+
+/* ===== enhanced hero ===== */
+.hero { background: radial-gradient(120% 100% at 50% 0%, #eef3ff 0%, #ffffff 60%); border-radius: 0 0 24px 24px; margin-bottom: 8px; }
+.section-title { font-size: 22px; font-weight: 800; margin: 36px 0 6px; }
+
 footer.site { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: 14px; }
 footer.site a { color: var(--muted); }
+
+/* ===== dark mode ===== */
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#15171a; --fg:#e8eaed; --muted:#9aa0a6; --line:#2b2f36; --card:#1d2025; }
+  body { background: var(--bg); color: var(--fg); }
+  header.site { background: rgba(21,23,26,0.9); }
+  .card, .rankcard { background:#1d2025; }
+  .hero { background: radial-gradient(120% 100% at 50% 0%, #1b2233 0%, #15171a 60%); }
+  tr:nth-child(even) td { background:#1a1d22; }
+  .disclosure { background:#1a1d22; }
+}

@@ -85,6 +85,39 @@ def md_to_html(body):
             continue
 
         # shortcodes ::name ...::
+        # ::card rank | name | rating | price | blurb | url | ctaラベル::
+        m = re.match(r"::card\s+(.+?)::", stripped)
+        if m:
+            parts = [p.strip() for p in m.group(1).split("|")]
+            rank = parts[0] if len(parts) > 0 else "1"
+            name = parts[1] if len(parts) > 1 else ""
+            rating = parts[2] if len(parts) > 2 else ""
+            price = parts[3] if len(parts) > 3 else ""
+            blurb = parts[4] if len(parts) > 4 else ""
+            url = parts[5] if len(parts) > 5 else "#"
+            label = parts[6] if len(parts) > 6 else "公式サイトを見る"
+            try:
+                rv = float(rating)
+            except ValueError:
+                rv = 0.0
+            full = int(round(rv))
+            stars = "★" * full + "☆" * (5 - full)
+            gcls = {"1": "g1", "2": "g2", "3": "g3"}.get(rank, "")
+            topcls = " top" if rank == "1" else ""
+            rating_html = (f'<span class="rc-rating"><span class="stars">{stars}</span> {rating}</span>'
+                           if rating else "")
+            price_html = f'<div class="rc-price">{html.escape(price)}</div>' if price else ""
+            out.append(
+                f'<div class="rankcard{topcls}">'
+                f'<span class="badge {gcls}">No.{html.escape(rank)}</span>'
+                f'<div class="rc-head"><span class="rc-name">{html.escape(name)}</span>{rating_html}</div>'
+                f'{price_html}'
+                f'<p class="rc-blurb">{inline(blurb)}</p>'
+                f'<a class="cta" href="{html.escape(url)}" target="_blank" rel="nofollow sponsored">{html.escape(label)}</a>'
+                f'</div>'
+            )
+            i += 1
+            continue
         m = re.match(r"::cta\s+(.+?)::", stripped)
         if m:
             parts = [p.strip() for p in m.group(1).split("|")]
