@@ -7,23 +7,37 @@
 <meta name="description" content="{{site_description}}">
 <link rel="canonical" href="{{base_url}}/index.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{{site_name}}">
+<meta property="og:title" content="{{site_name}}｜{{tagline}}">
 <meta property="og:description" content="{{site_description}}">
+<meta property="og:url" content="{{base_url}}/">
+<meta name="theme-color" content="#6d5efc">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="site">
   <div class="wrap">
-    <a class="brand" href="index.html">{{site_name}}</a>
+    <a class="brand" href="index.html">サブ<em>たま</em></a>
     <nav><a href="index.html">記事一覧</a></nav>
   </div>
 </header>
 <main>
-  <div class="wrap">
-    <div class="hero">
-      <h1>{{site_name}}</h1>
-      <p>{{tagline}}</p>
+  <section class="hero">
+    <span class="eyebrow">🍮 VOD・サブスク比較メディア</span>
+    <h1>もう<span class="hl">「どれが自分に合うか」</span>で迷わない。</h1>
+    <p class="sub">{{tagline}}。無料体験・料金・使い勝手を実際に並べて比較します。</p>
+    <div class="trustbar">
+      <span class="stat"><b>{{count}}</b>記事で比較</span>
+      <span class="stat">💴<b>料金</b>で損しない</span>
+      <span class="stat">🎁<b>無料体験</b>を厳選</span>
+      <span class="stat">🔄 <b>毎日</b>更新中</span>
     </div>
+  </section>
+  <div class="wrap">
+    <h2 class="section-title">記事一覧</h2>
+    <p class="section-sub">目的別に、いま読まれている比較ガイド。</p>
     <div class="card-grid">
       {{cards}}
     </div>
@@ -31,7 +45,10 @@
 </main>
 <footer class="site">
   <div class="wrap">
-    &copy; {{year}} {{site_name}} ｜ サブスク・VODの比較メディア
+    <span class="fbrand">🍮 {{site_name}}</span>
+    <span>{{tagline}}</span>
+    <span class="fnote">※当サイトはアフィリエイト広告（プロモーション）を含みます。掲載順・評価は編集部の基準によるもので、料金や内容は各公式サイトの最新情報をご確認ください。</span>
+    <span>&copy; {{year}} {{site_name}}</span>
   </div>
 </footer>
 </body>

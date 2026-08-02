@@ -199,6 +199,21 @@ def render(tpl, mapping):
     return tpl
 
 
+def thumb_glyph(m):
+    """カードのサムネに出す絵文字をタイトル/カテゴリから推定（視覚的な区別用）。"""
+    t = (m.get("title", "") + " " + m.get("category", ""))
+    table = [
+        ("韓", "🇰🇷"), ("アニメ", "🎌"), ("学生", "🎓"), ("無料", "🎁"),
+        ("一人暮らし", "🏠"), ("コスパ", "💰"), ("かけもち", "🔀"), ("掛け持ち", "🔀"),
+        ("DMM", "🎬"), ("Netflix", "🍿"), ("U-NEXT", "🎥"), ("音楽", "🎧"),
+        ("電子書籍", "📚"), ("映画", "🎞️"), ("ドラマ", "📺"),
+    ]
+    for kw, emo in table:
+        if kw in t:
+            return emo
+    return "📺"
+
+
 def main():
     cfg = load_config()
     os.makedirs(OUT_ARTICLES, exist_ok=True)
@@ -236,10 +251,17 @@ def main():
 
     cards = []
     for m in articles:
+        href = f'articles/{m["slug"]}.html'
         cards.append(
-            f'<div class="card"><span class="tag">{html.escape(m.get("category",""))}</span>'
-            f'<h2><a class="full" href="articles/{m["slug"]}.html">{html.escape(m.get("title",""))}</a></h2>'
-            f'<p>{html.escape(m.get("description",""))}</p></div>'
+            f'<article class="card">'
+            f'<div class="thumb">{thumb_glyph(m)}</div>'
+            f'<div class="body">'
+            f'<span class="tag">{html.escape(m.get("category",""))}</span>'
+            f'<h2><a href="{href}">{html.escape(m.get("title",""))}</a></h2>'
+            f'<p>{html.escape(m.get("description",""))}</p>'
+            f'<span class="more">続きを読む →</span>'
+            f'<a class="full" href="{href}">記事を読む</a>'
+            f'</div></article>'
         )
 
     index_html = render(index_tpl, {
@@ -248,6 +270,7 @@ def main():
         "site_description": cfg["site_description"],
         "base_url": cfg["base_url"],
         "year": cfg["year"],
+        "count": str(len(articles)),
         "cards": "\n".join(cards) if cards else "<p>記事を準備中です。</p>",
     })
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
